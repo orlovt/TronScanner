@@ -1,14 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sankey Graph Visualization</title>
+
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery UI library -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
-    <script src="/static/scripts.js" defer></script>
+    <link rel="stylesheet" href="/static/styles.css">
+
+    <!-- Roboto Mono font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        $(document).ready(function() {
+            $("#fromDate").datepicker({
+                dateFormat: "yy-mm-dd", // Format as YYYY-MM-DD
+                onClose: function(selectedDate) {
+                    // Set the minimum selectable date for the tillDate input
+                    $("#tillDate").datepicker("option", "minDate", selectedDate);
+                }
+            });
+            $("#tillDate").datepicker({
+                dateFormat: "yy-mm-dd", // Format as YYYY-MM-DD
+                onClose: function(selectedDate) {
+                    // Set the maximum selectable date for the fromDate input
+                    $("#fromDate").datepicker("option", "maxDate", selectedDate);
+                }
+            });
+        });
+    </script>
 </head>
+
 <body>
+    <!-- Header section -->
+    <div id="header">
+        <span>USDT BlockChain Explorer</span>
+        <a href="faq.html">FAQ</a>
+    </div>
+    <div id="description">
+        <h2>Welcome to the USDT BlockChain Explorer</h2>
+        <p>Use the form below to fetch and visualize blockchain data based on specific criteria. Enter the desired parameters and click "Fetch Data" to see the results.</p>
+    </div>
     <form id="dataForm">
         <input type="number" id="nboundDepth" placeholder="nboundDepth">
         <input type="number" id="outboundDepth" placeholder="outboundDepth">
@@ -19,6 +59,15 @@
         <button type="button" onclick="fetchData()">Fetch Data</button>
     </form>
     <div id="loading">Loading...</div>
-    <div id="myDiv" style="width: 100%; height: 100vh;"></div>
+    <div id="pieChartsContainer" style="width: 100%; height: 60vh;"></div>
+    <div id="myDiv" style="width: 100%; height: 110vh;"></div>
+    <footer>
+        <div id="footer-container">
+            <a href="https://github.com/your_username" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com/in/your_username" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+    </footer>    
+    <script src="/static/scripts.js"></script>
 </body>
+
 </html>

@@ -1,14 +1,5 @@
 package main
 
-// BITQUERY
-// https://ide.bitquery.io/#
-// https://explorer.bitquery.io/tron/address/TJ7m1yk5fbhhWkhxiM6Jh5ZH8zrSTvbi6D/graph?from=2023-05-01&till=2023-09-26
-// JSVIEWER
-// https://codebeautify.org/jsonviewer
-
-// SANKEY GRAPH IN PLOTLY.JS
-// https://plotly.com/javascript/sankey-diagram/
-
 import (
 	"fmt"
 	"io/ioutil"

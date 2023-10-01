@@ -29,7 +29,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Safely extract values with type assertions
-	nboundDepth, ok := requestData["nboundDepth"].(float64) // Note: JSON numbers are float64 by default in Go
+	nboundDepth, ok := requestData["nboundDepth"].(float64)
 	if !ok {
 		http.Error(w, "Invalid or missing nboundDepth", http.StatusBadRequest)
 		return
@@ -63,8 +63,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	jsonData := fetchBitQueryData(int(nboundDepth), int(outboundDepth), int(limit), 0, address, "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t", fromDate, tillDate, "%Y-%m")
-
-	// jsonData := fetchBitQueryData(3, 3, 7, 0, "TJ7m1yk5fbhhWkhxiM6Jh5ZH8zrSTvbi6D", "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t", "2023-05-01", "2023-09-26T23:59:59", "%Y-%m")
 
 	var data map[string]interface{}
 	if err := json.Unmarshal([]byte(jsonData), &data); err != nil {
