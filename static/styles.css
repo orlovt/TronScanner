@@ -45,10 +45,10 @@ body {
     padding: 10px;
     font-size: 18px;
     background-color: #2c2c2c;
-    border-radius: 5px;
+    border-radius: 5px; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
-
+#e0e0e0
 #description h2 {
     color: #e0e0e0;
     margin-bottom: 10px;
@@ -162,12 +162,11 @@ footer a:hover {
 }
 
 /* Pie charts container */
-/* .pie-charts-container {
+.pie-charts-container {
     display: flex;
-    justify-content: space-between;
     width: 100%;
     margin-bottom: 20px;
-} */
+}
 
 #pieChartsContainer {
     width: 100%;
@@ -177,7 +176,8 @@ footer a:hover {
 .pie-charts-container > div {
     flex-grow: 1;
     flex-shrink: 0;
-    width: 50%;
+    width: 48%;  
+    margin-right: 2%;  
 }
 
 /* Dark mode styles */

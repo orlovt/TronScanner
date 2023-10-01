@@ -16,21 +16,36 @@ function formatLabel(address) {
 function computeFlows(labels, sources, targets, values) {
     const inflows = new Map();
     const outflows = new Map();
-    labels.forEach(label => {
-        inflows.set(label, 0);
-        outflows.set(label, 0);
+
+    sources.forEach((source, index) => {
+        outflows.set(source, (outflows.get(source) || 0) + values[index]);
     });
-    sources.forEach((source, index) => outflows.set(source, (outflows.get(source) || 0) + values[index]));
-    targets.forEach((target, index) => inflows.set(target, (inflows.get(target) || 0) + values[index]));
+    targets.forEach((target, index) => {
+        inflows.set(target, (inflows.get(target) || 0) + values[index]);
+    });
     return { inflows, outflows };
 }
 
+const pieColors = [
+    '#e0e0e0', '#2c3e50', '#2c2c2c', '#3a3a3a', '#4a4a4a', 
+    '#3c4e70', '#1c1c1c', '#5c5c5c', '#4c5e80', '#6c6c6c', 
+    '#0c0c0c', '#7c7c7c', '#5c6e90', '#8c8c8c', '#9c9c9c',
+    '#acacac', '#bcbcbc', '#ccdcdc', '#dcdcdc', '#ececec'
+];
+
 function getColorBasedOnValue(value, maxVal) {
     const ratio = value / maxVal;
-    const red = Math.floor(255 * ratio);
-    const blue = Math.floor(255 * (1 - ratio));
-    return `rgba(${red * 0.9}, 0, ${blue * 0.9}, 0.79)`;
+
+    // Define the RGB values for the start and end colors
+    const startColor = { r: 44, g: 62, b: 80 };  // #2c3e50
+    const endColor = { r: 224, g: 224, b: 224 };  // #e0e0e0
+    // Interpolate the RGB values based on the ratio
+    const red = Math.floor(startColor.r + (endColor.r - startColor.r) * ratio);
+    const green = Math.floor(startColor.g + (endColor.g - startColor.g) * ratio);
+    const blue = Math.floor(startColor.b + (endColor.b - startColor.b) * ratio);
+    return `rgba(${red}, ${green}, ${blue}, 0.79)`;
 }
+
 
 function formatCurrency(value) {
     return new Intl.NumberFormat('en-US', {
@@ -91,18 +106,18 @@ function renderSankeyGraph(data) {
                 label: allLabels,
                 customdata: hoverData,
                 hovertemplate: '%{customdata}<extra></extra>',
-                color: "262626"
+                color: "#337ab7"  // Updated node color
             },
             labelFont: {
-                color: "#e0e0e0",  // Font color of the labels
-                size: 16  // Font size of the labels
+                color: "#FFFFFF",  // Updated font color to white
+                size: 18  // Increased font size
             }, 
             link: {
                 source: mappedSources,
                 target: mappedTargets,
                 value: values,
-                color: linkColors.map(color => color === "#2c3e50" ? "#3c4e70" : "#3a3a3a"),  // Adjusted colors
-                hovertemplate: '%{value:,} USDT<extra></extra>', 
+                color: linkColors, 
+                hovertemplate: '%{value:,} USDT<extra></extra>'
             }};
             var layout = {
                 title: {
@@ -123,6 +138,7 @@ function renderSankeyGraph(data) {
         };
     Plotly.newPlot('myDiv', [sankeyData], layout);
 }
+
 
 function renderPieCharts(data) {
     const { sources, targets, values } = data;
@@ -157,23 +173,7 @@ function renderPieCharts(data) {
 
     const inboundLabels = Object.keys(inboundValues);
     const inboundAmounts = Object.values(inboundValues);
-    const pieColors = [
-        '#e0e0e0', // Primary text color
-        '#2c3e50', // Accent color
-        '#2c2c2c', // Secondary background color
-        '#3a3a3a', // Border color
-        '#4a4a4a', // Darker shade of border color
-        '#3c4e70', // Darker shade of accent color
-        '#1c1c1c', // Darker shade of primary background color
-        '#5c5c5c', // Lighter shade of border color
-        '#4c5e80', // Lighter shade of accent color
-        '#6c6c6c', // Even lighter shade of border color
-        '#0c0c0c', // Even darker shade of primary background color
-        '#7c7c7c', // Another lighter shade of border color
-        '#5c6e90'  // Another lighter shade of accent color
-    ];
     
-
     // Pie chart data for outbound and inbound transactions
     const outboundData = {
         
@@ -181,7 +181,7 @@ function renderPieCharts(data) {
         labels: outboundLabels,
         type: 'pie',
         name: 'Outbound',
-        // domain: { x: [0, 0.48] },  // This makes it occupy the left half of the grid
+        domain: { x: [0.25, 0.525] },  // This makes it occupy the left half of the grid
         title: 'Outbound Transactions', 
         marker: {
             colors: pieColors
@@ -193,7 +193,7 @@ function renderPieCharts(data) {
         labels: inboundLabels,
         type: 'pie',
         name: 'Inbound',
-        // domain: { x: [0.52, 1] },  // This makes it occupy the right half of the grid
+        domain: { x: [0.575, 0.825] },  // This makes it occupy the right half of the grid
         title: 'Inbound Transactions', 
         marker: {
             colors: pieColors
@@ -203,6 +203,7 @@ function renderPieCharts(data) {
     const layout = {
         title: {
             text: "Transactions Overview",
+            pad: { bottom: 20 }, 
             font: {
                 size: 16,
                 family: "'Roboto Mono', monospace",  // Updated font
@@ -213,8 +214,7 @@ function renderPieCharts(data) {
             family: "'Roboto Mono', monospace",
             size: 14,
             color: '#e0e0e0'  
-        },
-        grid: {rows: 1, columns: 2},
+        }, 
         plot_bgcolor: "#1e1e1e",  // Updated background color
         paper_bgcolor: "#1e1e1e",  // Updated paper background color
     };
