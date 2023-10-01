@@ -1,3 +1,3 @@
-module gotron
+module github.com/orlovt/tron_go
 
-go 1.21.1
+go 1.17

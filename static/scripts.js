@@ -181,7 +181,7 @@ function renderPieCharts(data) {
         labels: outboundLabels,
         type: 'pie',
         name: 'Outbound',
-        domain: { x: [0, 0.42] },  // This makes it occupy the left half of the grid
+        // domain: { x: [0, 0.48] },  // This makes it occupy the left half of the grid
         title: 'Outbound Transactions', 
         marker: {
             colors: pieColors
@@ -193,7 +193,7 @@ function renderPieCharts(data) {
         labels: inboundLabels,
         type: 'pie',
         name: 'Inbound',
-        domain: { x: [0.58, 1] },  // This makes it occupy the right half of the grid
+        // domain: { x: [0.52, 1] },  // This makes it occupy the right half of the grid
         title: 'Inbound Transactions', 
         marker: {
             colors: pieColors

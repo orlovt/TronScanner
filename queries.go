@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
+	"os"
 	"strings"
 )
 
@@ -73,8 +75,12 @@ func fetchBitQueryData(inboundDepth, outboundDepth, limit, offset int, address, 
 		fmt.Println(err)
 		return ""
 	}
+	apiKey := os.Getenv("MY_API_KEY")
+	if apiKey == "" {
+		log.Fatal("API key not set in MY_API_KEY environment variable")
+	}
 	req.Header.Add("Content-Type", "application/json")
-	req.Header.Add("X-API-KEY", "BQYdHYhilyWCcxKn29hK6W9ZNPmm7oAC")
+	req.Header.Add("X-API-KEY", apiKey)
 
 	res, err := client.Do(req)
 	if err != nil {

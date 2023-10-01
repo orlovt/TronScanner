@@ -162,11 +162,16 @@ footer a:hover {
 }
 
 /* Pie charts container */
-.pie-charts-container {
+/* .pie-charts-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin-bottom: 20px;
+} */
+
+#pieChartsContainer {
+    width: 100%;
+    height: 50vh; 
 }
 
 .pie-charts-container > div {
