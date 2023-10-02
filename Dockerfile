@@ -14,6 +14,7 @@ RUN go mod download
 COPY . .
 
 # Build the Go app
+ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
 RUN go build -o main .
 
 # Expose port 8080 for the application
