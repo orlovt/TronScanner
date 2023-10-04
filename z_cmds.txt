@@ -7,3 +7,16 @@ docker push gcr.io/tronscanner/tron_go
 
 gcloud container images list --repository=gcr.io/tronscanner
 gcloud run deploy tron-go --image gcr.io/tronscanner/tron_go --platform managed --region us-central1 --allow-unauthenticated
+
+
+
+
+
+// BITQUERY
+// https://ide.bitquery.io/#
+// https://explorer.bitquery.io/tron/address/TJ7m1yk5fbhhWkhxiM6Jh5ZH8zrSTvbi6D/graph?from=2023-05-01&till=2023-09-26
+// JSVIEWER
+// https://codebeautify.org/jsonviewer
+
+// SANKEY GRAPH IN PLOTLY.JS
+// https://plotly.com/javascript/sankey-diagram/
