@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 	"strings"
 )
 
@@ -75,7 +74,8 @@ func fetchBitQueryData(inboundDepth, outboundDepth, limit, offset int, address, 
 		fmt.Println(err)
 		return ""
 	}
-	apiKey := os.Getenv("MY_API_KEY")
+	apiKey := "BQYdHYhilyWCcxKn29hK6W9ZNPmm7oAC"
+	// apiKey := os.Getenv("MY_API_KEY")
 	if apiKey == "" {
 		log.Fatal("API key not set in MY_API_KEY environment variable")
 	}

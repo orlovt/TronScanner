@@ -8,7 +8,6 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Handler has received request for /getdata")
-	// fmt.Println("Received request:", r.Method, r.URL, r.Header)
 
 	if r.Method != http.MethodPost {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
@@ -22,12 +21,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	// fmt.Printf("Request data: %+v\n", requestData)
 
-	if r.Method != http.MethodPost {
-		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
-		return
-	}
 	// Safely extract values with type assertions
 	nboundDepth, ok := requestData["nboundDepth"].(float64)
 	if !ok {
@@ -62,7 +56,17 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	jsonData := fetchBitQueryData(int(nboundDepth), int(outboundDepth), int(limit), 0, address, "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t", fromDate, tillDate, "%Y-%m")
+	// Always call fetchBitQueryData2 first
+	transactionsData := fetchBitQueryData2(50, address, fromDate, tillDate, "%Y-%m-%d")
+
+	var transactions map[string]interface{}
+	if err := json.Unmarshal([]byte(transactionsData), &transactions); err != nil {
+		http.Error(w, "Failed to unmarshal transactions JSON data", http.StatusInternalServerError)
+		return
+	}
+
+	// Then call fetchBitQueryData
+	jsonData := fetchBitQueryData(int(nboundDepth), int(outboundDepth), int(limit), 0, address, "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t", fromDate, tillDate, "%Y-%m-%d")
 
 	var data map[string]interface{}
 	if err := json.Unmarshal([]byte(jsonData), &data); err != nil {
@@ -76,14 +80,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// fmt.Println("Sources:", sources)
-	// fmt.Println("Targets:", targets)
-	// fmt.Println("Values:", values)
-
+	// Combine the results from both functions into one response
 	response := map[string]interface{}{
-		"sources": sources,
-		"targets": targets,
-		"values":  values,
+		"transactions": transactions,
+		"sources":      sources,
+		"targets":      targets,
+		"values":       values,
 	}
 
 	responseJSON, err := json.Marshal(response)
@@ -96,7 +98,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(responseJSON)
 	fmt.Println("Wrote JSON")
-
+	fmt.Println(string(responseJSON))
 }
 
 func serveSankey(w http.ResponseWriter, r *http.Request) {

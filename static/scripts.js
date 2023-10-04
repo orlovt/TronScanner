@@ -75,8 +75,11 @@ function fetchData() {
     .then(response => response.json())
     .then(data => {
         document.getElementById("loading").style.display = "none";
-        renderSankeyGraph(data);
+        // Extract relevant transactions and render the table
+        const relevantTransactions = extractRelevantTransactions(data);
+        renderTransactionsTable(relevantTransactions);  // New function to render the transactions table
         renderPieCharts(data);
+        renderSankeyGraph(data);
     });
 }
 
@@ -222,3 +225,37 @@ function renderPieCharts(data) {
     // Plotting the pie charts side by side using subplot functionality
     Plotly.newPlot('pieChartsContainer', [outboundData, inboundData], layout);
 }
+
+function extractRelevantTransactions(data) {
+    const transfers = data.transactions.data.tron.transfers;
+    const relevantTransfers = transfers.filter(transaction => {
+        return transaction.currency.symbol === "TRX" || transaction.currency.symbol === "USDT";
+    });
+
+    return relevantTransfers.map(transaction => {
+        return {
+            senderAddress: transaction.address.address,
+            receiverAddress: transaction.receiver.address,
+            amount: transaction.amount,
+            currencySymbol: transaction.currency.symbol,
+            timestamp: transaction.block.timestamp.time
+        };
+    });
+}
+
+function renderTransactionsTable(transactions) {
+    let table = "<table border='1'>";
+    table += "<thead><tr><th>Timestamp</th><th>Address</th><th>Currency</th><th>Amount</th></tr></thead>";
+    table += "<tbody>";
+
+    transactions.forEach(transaction => {
+        table += `<tr><td>${transaction.timestamp}</td><td>${transaction.senderAddress} -> ${transaction.receiverAddress}</td><td>${transaction.currencySymbol}</td><td>${transaction.amount}</td></tr>`;
+    });
+
+    table += "</tbody></table>";
+
+    // Insert the table into a container. Make sure you have a container with the ID "transactionsTableContainer" in your HTML.
+    $("#transactionsTableContainer").html(table);
+}
+
+

@@ -50,15 +50,18 @@
         <p>Use the form below to fetch and visualize blockchain data based on specific criteria. Enter the desired parameters and click "Fetch Data" to see the results.</p>
     </div>
     <form id="dataForm">
-        <input type="number" id="nboundDepth" placeholder="nboundDepth">
-        <input type="number" id="outboundDepth" placeholder="outboundDepth">
-        <input type="number" id="limit" placeholder="limit">
-        <input type="text" id="address" placeholder="address">
-        <input type="text" id="fromDate" placeholder="fromDate (YYYY-MM-DD)">
-        <input type="text" id="tillDate" placeholder="tillDate (YYYY-MM-DD)">
+        <input type="number" id="nboundDepth" placeholder="nboundDepth", value="1">
+        <input type="number" id="outboundDepth" placeholder="outboundDepth", value="1">
+        <input type="number" id="limit" placeholder="limit", value="4">
+        <input type="text" id="address" placeholder="address", value="TJ7m1yk5fbhhWkhxiM6Jh5ZH8zrSTvbi6D">
+        <input type="text" id="fromDate" placeholder="fromDate (YYYY-MM-DD)", value="2023-05-01">
+        <input type="text" id="tillDate" placeholder="tillDate (YYYY-MM-DD)", value="2023-08-01">
         <button type="button" onclick="fetchData()">Fetch Data</button>
     </form>
     <div id="loading">Loading...</div>
+    <div id="transactionsTableContainer">
+        <!-- The table will be inserted here -->
+    </div>    
     <div id="pieChartsContainer" style="width: 100%; height: 60vh;"></div>
     <div id="myDiv" style="width: 100%; height: 110vh;"></div>
     <footer>
