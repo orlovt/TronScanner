@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"encoding/json"
@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func Handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Handler has received request for /getdata")
 
 	if r.Method != http.MethodPost {
@@ -57,7 +57,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Always call fetchBitQueryData2 first
-	transactionsData := getIncomingTransfersData(50, address, fromDate, tillDate, "%Y-%m-%d")
+	transactionsData := GetIncomingTransfersData(50, address, fromDate, tillDate, "%Y-%m-%d")
 
 	var transactions map[string]interface{}
 	if err := json.Unmarshal([]byte(transactionsData), &transactions); err != nil {
@@ -66,7 +66,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Then call fetchBitQueryData
-	jsonData := getVolumesData(int(nboundDepth), int(outboundDepth), int(limit), 0, address, "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t", fromDate, tillDate, "%Y-%m-%d")
+	jsonData := GetVolumesData(int(nboundDepth), int(outboundDepth), int(limit), 0, address, "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t", fromDate, tillDate, "%Y-%m-%d")
 
 	var data map[string]interface{}
 	if err := json.Unmarshal([]byte(jsonData), &data); err != nil {
@@ -74,7 +74,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sources, targets, values, err := preprocessData(data)
+	sources, targets, values, err := PreprocessData(data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -101,6 +101,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	// fmt.Println(string(responseJSON))
 }
 
-func serveSankey(w http.ResponseWriter, r *http.Request) {
+func ServeSankey(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "sankey.html")
 }

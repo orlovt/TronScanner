@@ -80,6 +80,10 @@ function fetchData() {
         renderTransactionsTable(relevantTransactions);  // New function to render the transactions table
         renderPieCharts(data);
         renderSankeyGraph(data);
+        
+        document.getElementById('transactionsDescription').style.display = 'block';
+        document.getElementById('pieChartsDescription').style.display = 'block';
+        document.getElementById('sankeyDescription').style.display = 'block';
     });
 }
 

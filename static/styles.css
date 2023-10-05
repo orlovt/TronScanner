@@ -1,145 +1,153 @@
-/* Reset and global styles */
+/* Global styles */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+
+
+
 body {
     font-family: 'Roboto Mono', monospace;
     background-color: #1e1e1e;
     color: #e0e0e0;
     line-height: 1.6;
-    font-size: 18px; /* Increased base font size for better readability */
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.js-plotly-plot .plotly {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-
-/* Header styles */
+/* Header */
 #header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px; /* Increased padding for better spacing */
+    padding: 15px 20px;
     background-color: #121212;
     border-bottom: 1px solid #2c2c2c;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 #header span {
-    font-size: 24px; /* Increased font size for the header title */
+    font-size: 28px;
     font-weight: bold;
 }
 
 #header a {
     color: #e0e0e0;
     text-decoration: none;
-    padding: 8px 18px; /* Adjusted padding for better appearance */
+    padding: 8px 18px;
     border: 1px solid #e0e0e0;
     border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s;
 }
 
 #header a:hover {
     background-color: #2c3e50;
-    color: #e0e0e0;
-}
-#myDiv {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-/* Description styles */
+/* Description */
 #description {
-    max-width: 800px;
-    margin: 30px auto; /* Increased margin for better spacing */
+    max-width: 1200px;
+    margin: auto; /* Vertical margin set to 20px for consistency with #dataForm */
     text-align: center;
-    padding: 20px; /* Increased padding for better spacing */
-    font-size: 20px; /* Increased font size for better readability */
+    padding: 25px;
     background-color: #2c2c2c;
-    border-radius: 5px; 
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 #description h2 {
-    color: #e0e0e0;
-    margin-bottom: 15px; /* Increased margin for better spacing */
-    font-size: 26px; /* Increased font size for the heading */
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 26px;
 }
 
-/* Form styles */
+/* Form */
 #dataForm {
-    max-width: 750px;
-    margin: 0 auto 50px; /* Increased bottom margin for better spacing */
-    padding: 25px; /* Increased padding for better spacing */
-    border-radius: 5px;
+    font-family: 'Roboto Mono', monospace;
+    max-width: 1200px;
+    margin: 20px auto; /* Horizontal margin set to auto to center the form */
+    padding: 25px; /* Set padding to 25px to match #description */
     background-color: #2c2c2c;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+
+
+
+#dataForm input, #dataForm button {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 20px;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
 }
 
 #dataForm input[type="text"],
 #dataForm input[type="number"],
 #dataForm input[type="date"] {
-    font-family: 'Roboto Mono', monospace;
     background-color: #262626;
     color: #e0e0e0;
     border: 1px solid #3a3a3a;
-    transition: border-color 0.3s, background-color 0.3s;
-    font-size: 20px; /* Increased font size for better readability */
-    width: 100%; /* Full width for better appearance */
-    padding: 10px; /* Increased padding for better spacing */
-    margin-bottom: 10px; /* Added margin for better spacing between inputs */
 }
 
+/* Button styling */
 #dataForm button {
     font-family: 'Roboto Mono', monospace;
-    background-color: #2c3e50; /* Darker background for better contrast */
+    background-color: #2c2c2c;
     color: #e0e0e0;
     transition: background-color 0.3s;
-    font-size: 20px; /* Increased font size for better readability */
-    padding: 12px; /* Increased padding for a larger button */
+    font-size: 18px;
+    width: 100%;
+    margin-top: 10px;
     display: block;
-    width: 100%; /* Full width button */
-    border: none; /* Removed border */
-    border-radius: 5px; /* Added border radius for rounded corners */
-    cursor: pointer; /* Hand cursor on hover */
+    box-shadow: none;
 }
 
 #dataForm button:hover {
-    background-color: #34495e; /* Slightly darker shade on hover */
+    background-color: #34495e;
 }
+
+/* Add this to your styles.css */
+#transactionsDescription,
+#pieChartsDescription,
+#sankeyDescription {
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    padding: 25px;
+    background-color: #2c2c2c;
+    border-radius: 10px;
+    display: none;
+}
+
+
 
 /* Transactions table */
 #transactionsTableContainer {
-    max-width: 80%; /* Allow some margin on the sides */
-    margin: 20px auto; /* Center the table and add some spacing */
-    overflow-x: auto; /* Allow horizontal scrolling if the table is too wide */
+    max-width: 1200px;
+    margin: 20px auto;
+    overflow-x: auto;
 }
 
 #transactionsTableContainer table {
-    width: 100%; /* Full width */
-    border-collapse: collapse; /* Remove spacing between cells */
-    margin-top: 20px; /* Add some spacing above the table */
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
 }
 
 #transactionsTableContainer th, #transactionsTableContainer td {
-    padding: 10px; /* Add some padding inside cells */
-    text-align: center; /* Center text */
+    padding: 15px;
+    text-align: center;
+    border:1.15px solid #3a3a3a;
 }
 
-/* Footer styles */
+/* Footer */
 footer {
-    padding: 15px 0; /* Increased padding for better spacing */
+    padding: 15px 0;
     background-color: #121212;
     border-top: 1px solid #2c2c2c;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-    bottom: 0;
     width: 100%;
 }
 
@@ -148,38 +156,35 @@ footer {
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 footer a {
     color: #e0e0e0;
     text-decoration: none;
-    margin: 0 15px; /* Increased margin for better spacing */
-    padding: 5px 10px; /* Adjusted padding for better appearance */
+    margin: 0 15px;
+    padding: 5px 10px;
     border: 1px solid #e0e0e0;
     border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-    font-size: 16px; /* Adjusted font size for better readability */
+    font-size: 16px;
 }
 
 footer a:hover {
     background-color: #2c3e50;
-    color: #e0e0e0;
 }
 
-/* Loading styles */
+/* Loading */
 #loading {
     display: none;
     text-align: center;
     padding: 20px;
-    font-size: 20px; /* Increased font size for better readability */
+    font-size: 20px;
 }
 
-/* Pie charts container */
+/* Pie charts */
 .pie-charts-container {
     display: flex;
     max-width: 80%;
-    margin-bottom: 30px; /* Increased margin for better spacing */
+    margin-bottom: 30px;
 }
 
 #pieChartsContainer {
@@ -187,29 +192,9 @@ footer a:hover {
     height: 50vh; 
 }
 
-#transactionsTableContainer {
-    max-width: 90%; /* Allow some margin on the sides */
-    margin: 20px auto; /* Center the container and add some spacing */
-    display: flex; /* Make it a flex container */
-    justify-content: center; /* Center the table horizontally */
-    overflow-x: auto; /* Allow horizontal scrolling if the table is too wide */
-}
-
-#transactionsTableContainer table {
-    width: auto; /* Let the table take its natural width */
-    border-collapse: collapse; /* Remove spacing between cells */
-    margin-top: 20px; /* Add some spacing above the table */
-}
-
 .pie-charts-container > div {
     flex-grow: 1;
     flex-shrink: 0;
     width: 48%;  
     margin-right: 2%;  
-}
-
-/* Dark mode styles */
-.dark-mode {
-    background-color: #333;
-    color: white;
 }

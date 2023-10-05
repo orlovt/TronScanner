@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func getIncomingTransfersData(limit int, address, from, till, dateFormat string) string {
+func GetIncomingTransfersData(limit int, address, from, till, dateFormat string) string {
 	url := "https://graphql.bitquery.io"
 	method := "POST"
 

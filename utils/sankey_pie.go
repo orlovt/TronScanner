@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func preprocessData(data map[string]interface{}) ([]string, []string, []float64, error) {
+func PreprocessData(data map[string]interface{}) ([]string, []string, []float64, error) {
 	fmt.Println("Preprocessing data")
 	var sources []string
 	var targets []string
@@ -46,7 +46,7 @@ func preprocessData(data map[string]interface{}) ([]string, []string, []float64,
 	return sources, targets, values, nil
 }
 
-func getVolumesData(inboundDepth, outboundDepth, limit, offset int, address, currency, fromDate, tillDate, dateFormat string) string {
+func GetVolumesData(inboundDepth, outboundDepth, limit, offset int, address, currency, fromDate, tillDate, dateFormat string) string {
 	url := "https://graphql.bitquery.io"
 	method := "POST"
 

@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"encoding/json"
@@ -16,7 +16,7 @@ type ApiResponse struct {
 	} `json:"data"`
 }
 
-func getBalance(address string) (float64, error) {
+func GetBalance(address string) (float64, error) {
 	resp, err := http.Get(baseURL + "/v1/accounts/" + address)
 	if err != nil {
 		return 0, err
@@ -47,13 +47,3 @@ func getBalance(address string) (float64, error) {
 
 	return 0, fmt.Errorf("balance not found for token address")
 }
-
-// func main() {
-// 	address := "TJ7m1yk5fbhhWkhxiM6Jh5ZH8zrSTvbi6D"
-// 	balance, err := getBalance(address)
-// 	if err != nil {
-// 		fmt.Println("Error:", err)
-// 		return
-// 	}
-// 	fmt.Printf("Balance for token address TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t: %f\n", balance)
-// }

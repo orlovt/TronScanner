@@ -45,7 +45,19 @@
     </div>
     <div id="description">
         <h2>Welcome to the USDT BlockChain Explorer</h2>
-        <p>Use the form below to fetch and visualize blockchain data based on specific criteria. Enter the desired parameters and click "Fetch Data" to see the results.</p>
+        <p>
+            Use the form below to fetch and visualize blockchain data:
+            <ul>
+                <li><strong>nboundDepth:</strong> Set the depth of incoming transactions</li>
+                <li><strong>outboundDepth:</strong> Set the depth of outgoing transactions</li>
+                <li><strong>limit:</strong> Number of nodes in Sankey graph per level </li>
+                <li><strong>address:</strong> Adress in <strong>TRC-20</strong> blockchain</li>
+                <li><strong>fromDate:</strong> Define the starting date of the range</li>
+                <li><strong>tillDate:</strong> Define the ending date of the range</li>
+            </ul>
+            <strong>After entering the desired parameters, click "Fetch Data" to see the results.</strong>
+        </p>
+        
     </div>
     <form id="dataForm">
         <input type="number" id="nboundDepth" placeholder="nboundDepth", value="1">
@@ -57,8 +69,17 @@
         <button type="button" onclick="fetchData()">Fetch Data</button>
     </form>
     <div id="loading">Loading...</div>
+    <div id="transactionsDescription">
+        <p>This section displays a detailed list of outgoing transactions based on your specified criteria.</p>
+    </div>
     <div id="transactionsTableContainer"></div>
+    <div id="pieChartsDescription">
+        <p>Visualize the distribution of received and sent funds between different addresses with these pie charts. Get a clear picture of how funds are distributed in the blockchain.</p>
+    </div>
     <div id="pieChartsContainer" style="width: 80%; height: 60vh;"></div>
+    <div id="sankeyDescription">
+        <p>Explore the Sankey graph below, which visually represents the movement and distribution of funds between different addresses. The width of the arrows indicates the flow quantity.</p>
+    </div>
     <div id="myDiv" style="width: 80%; height: 60vh;"></div>
     <footer>
         <div id="footer-container">
