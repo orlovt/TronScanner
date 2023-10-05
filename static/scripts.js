@@ -100,8 +100,8 @@ function renderSankeyGraph(data) {
             valueformat: ".0f",
             valuesuffix: " USDT",
             node: {
-                pad: 20,
-                thickness: 20,
+                pad: 25,
+                thickness: 3,
                 line: {
                     color: "#4a4a4a", 
                     width: 0.5
@@ -141,7 +141,6 @@ function renderSankeyGraph(data) {
         };
     Plotly.newPlot('myDiv', [sankeyData], layout);
 }
-
 
 function renderPieCharts(data) {
     const { sources, targets, values } = data;
@@ -229,7 +228,8 @@ function renderPieCharts(data) {
 function extractRelevantTransactions(data) {
     const transfers = data.transactions.data.tron.transfers;
     const relevantTransfers = transfers.filter(transaction => {
-        return transaction.currency.symbol === "TRX" || transaction.currency.symbol === "USDT";
+        // return transaction.currency.symbol === "TRX" || transaction.currency.symbol === "USDT";
+        return transaction.currency.symbol === "USDT";
     });
 
     return relevantTransfers.map(transaction => {
@@ -243,7 +243,13 @@ function extractRelevantTransactions(data) {
     });
 }
 
-function renderTransactionsTable(transactions) {
+function renderTransactionsTable(transactions, sortBy) {
+    if (sortBy === 'amount') {
+        transactions.sort((a, b) => b.amount - a.amount);
+    } else if (sortBy === 'time') {
+        transactions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    }
+
     let table = "<table border='1'>";
     table += "<thead><tr><th>Timestamp</th><th>Address</th><th>Currency</th><th>Amount</th></tr></thead>";
     table += "<tbody>";
@@ -254,8 +260,9 @@ function renderTransactionsTable(transactions) {
 
     table += "</tbody></table>";
 
-    // Insert the table into a container. Make sure you have a container with the ID "transactionsTableContainer" in your HTML.
     $("#transactionsTableContainer").html(table);
 }
+
+
 
 

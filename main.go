@@ -17,7 +17,6 @@ func main() {
 	if port == "" {
 		port = "8080" // Default port if not specified
 	}
-
 	// Start the server using the specified port
 	http.ListenAndServe(":"+port, nil)
 }

@@ -46,7 +46,7 @@ func preprocessData(data map[string]interface{}) ([]string, []string, []float64,
 	return sources, targets, values, nil
 }
 
-func fetchBitQueryData(inboundDepth, outboundDepth, limit, offset int, address, currency, fromDate, tillDate, dateFormat string) string {
+func getVolumesData(inboundDepth, outboundDepth, limit, offset int, address, currency, fromDate, tillDate, dateFormat string) string {
 	url := "https://graphql.bitquery.io"
 	method := "POST"
 

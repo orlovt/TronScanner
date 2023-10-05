@@ -57,7 +57,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Always call fetchBitQueryData2 first
-	transactionsData := fetchBitQueryData2(50, address, fromDate, tillDate, "%Y-%m-%d")
+	transactionsData := getIncomingTransfersData(50, address, fromDate, tillDate, "%Y-%m-%d")
 
 	var transactions map[string]interface{}
 	if err := json.Unmarshal([]byte(transactionsData), &transactions); err != nil {
@@ -66,7 +66,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Then call fetchBitQueryData
-	jsonData := fetchBitQueryData(int(nboundDepth), int(outboundDepth), int(limit), 0, address, "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t", fromDate, tillDate, "%Y-%m-%d")
+	jsonData := getVolumesData(int(nboundDepth), int(outboundDepth), int(limit), 0, address, "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t", fromDate, tillDate, "%Y-%m-%d")
 
 	var data map[string]interface{}
 	if err := json.Unmarshal([]byte(jsonData), &data); err != nil {
@@ -98,7 +98,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(responseJSON)
 	fmt.Println("Wrote JSON")
-	fmt.Println(string(responseJSON))
+	// fmt.Println(string(responseJSON))
 }
 
 func serveSankey(w http.ResponseWriter, r *http.Request) {
