@@ -102,5 +102,5 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func ServeSankey(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "sankey.html")
+	http.ServeFile(w, r, "./static/index.html")
 }
