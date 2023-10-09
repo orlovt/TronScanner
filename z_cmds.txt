@@ -20,3 +20,14 @@ gcloud run deploy tron-go --image gcr.io/tronscanner/tron_go --platform managed 
 
 // SANKEY GRAPH IN PLOTLY.JS
 // https://plotly.com/javascript/sankey-diagram/
+
+<!-- Use the form below to fetch and visualize blockchain data:
+<ul>
+    <li><strong>nboundDepth:</strong> Set the depth of incoming transactions</li>
+    <li><strong>outboundDepth:</strong> Set the depth of outgoing transactions</li>
+    <li><strong>limit:</strong> Number of nodes in Sankey graph per level </li>
+    <li><strong>address:</strong> Adress in <strong>TRC-20</strong> blockchain</li>
+    <li><strong>fromDate:</strong> Define the starting date of the range</li>
+    <li><strong>tillDate:</strong> Define the ending date of the range</li>
+</ul>
+<strong>After entering the desired parameters, click "Fetch Data" to see the results.</strong> -->

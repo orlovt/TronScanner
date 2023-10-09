@@ -5,9 +5,6 @@
     padding: 0;
 }
 
-
-
-
 body {
     font-family: 'Roboto Mono', monospace;
     background-color: #1e1e1e;
@@ -56,6 +53,12 @@ body {
     background-color: #2c2c2c;
     border-radius: 10px;
 }
+.inner-description {
+    width: 80%; /* Adjust as needed */
+    margin: 0 auto; /* Centers the container */
+    text-align: left; /* Aligns the content to the left */
+}
+
 
 #description h2 {
     width: 100%;
@@ -72,9 +75,6 @@ body {
     background-color: #2c2c2c;
     border-radius: 10px;
 }
-
-
-
 
 #dataForm input, #dataForm button {
     font-family: 'Roboto Mono', monospace;

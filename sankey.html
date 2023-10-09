@@ -41,23 +41,18 @@
     <!-- Header section -->
     <div id="header">
         <span>USDT BlockChain Explorer</span>
-        <!-- <a href="faq.html">FAQ</a> -->
     </div>
     <div id="description">
         <h2>Welcome to the USDT BlockChain Explorer</h2>
-        <p>
-            Use the form below to fetch and visualize blockchain data:
-            <ul>
-                <li><strong>nboundDepth:</strong> Set the depth of incoming transactions</li>
-                <li><strong>outboundDepth:</strong> Set the depth of outgoing transactions</li>
-                <li><strong>limit:</strong> Number of nodes in Sankey graph per level </li>
-                <li><strong>address:</strong> Adress in <strong>TRC-20</strong> blockchain</li>
-                <li><strong>fromDate:</strong> Define the starting date of the range</li>
-                <li><strong>tillDate:</strong> Define the ending date of the range</li>
-            </ul>
-            <strong>After entering the desired parameters, click "Fetch Data" to see the results.</strong>
-        </p>
-        
+        <div class="inner-description">
+            <strong>nboundDepth:</strong> Set the depth of incoming transactions<br>
+            <strong>outboundDepth:</strong> Set the depth of outgoing transactions<br>
+            <strong>limit:</strong> Number of nodes in Sankey graph per level<br>
+            <strong>address:</strong> Adress in <strong>TRC-20</strong> blockchain<br>
+            <strong>fromDate:</strong> Define the starting date of the range<br>
+            <strong>tillDate:</strong> Define the ending date of the range<br>
+            After entering the desired parameters, click "Fetch Data" to see the results.
+        </div>
     </div>
     <form id="dataForm">
         <input type="number" id="nboundDepth" placeholder="nboundDepth", value="1">
