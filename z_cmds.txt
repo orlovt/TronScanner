@@ -1,33 +1,3 @@
-docker buildx build --platform linux/amd64 -t tron_go . --load
-docker buildx build --platform linux/amd64 -t tron_go . --push
-
-
-docker tag tron_go gcr.io/tronscanner/tron_go
+docker buildx build --platform linux/amd64 -t gcr.io/tronscanner/tron_go . --load
 docker push gcr.io/tronscanner/tron_go
-
-gcloud container images list --repository=gcr.io/tronscanner
 gcloud run deploy tron-go --image gcr.io/tronscanner/tron_go --platform managed --region us-central1 --allow-unauthenticated
-
-
-
-
-
-// BITQUERY
-// https://ide.bitquery.io/#
-// https://explorer.bitquery.io/tron/address/TJ7m1yk5fbhhWkhxiM6Jh5ZH8zrSTvbi6D/graph?from=2023-05-01&till=2023-09-26
-// JSVIEWER
-// https://codebeautify.org/jsonviewer
-
-// SANKEY GRAPH IN PLOTLY.JS
-// https://plotly.com/javascript/sankey-diagram/
-
-<!-- Use the form below to fetch and visualize blockchain data:
-<ul>
-    <li><strong>nboundDepth:</strong> Set the depth of incoming transactions</li>
-    <li><strong>outboundDepth:</strong> Set the depth of outgoing transactions</li>
-    <li><strong>limit:</strong> Number of nodes in Sankey graph per level </li>
-    <li><strong>address:</strong> Adress in <strong>TRC-20</strong> blockchain</li>
-    <li><strong>fromDate:</strong> Define the starting date of the range</li>
-    <li><strong>tillDate:</strong> Define the ending date of the range</li>
-</ul>
-<strong>After entering the desired parameters, click "Fetch Data" to see the results.</strong> -->
