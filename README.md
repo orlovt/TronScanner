@@ -1,6 +1,8 @@
 # TronScanner
 
-TronScanner is a web-based tool designed to provide user-friendly data about USDT operations of specific wallet addresses in the TRC-20 network. It offers a comprehensive view of transactions, including detailed tables, pie charts, and a sankey graph to visualize inflow and outflow volumes.
+TronScanner is a web application designed to provide clear and user-friendly insights into USDT operations within the TRC-20 network. With TronScanner, users can effortlessly access a comprehensive view of transactions, visualized through detailed tables, intuitive pie charts, and a dynamic sankey graph, which provides deep insights into the money flows.
+
+
 
 ## Tech Stack
 
@@ -19,6 +21,34 @@ TronScanner is a web-based tool designed to provide user-friendly data about USD
 ## Usage
 
 Visit [TronScanner](https://tron-go-acjlbqquoq-uc.a.run.app) to start using the tool. Simply input the wallet address and select the desired time frame to retrieve and visualize the transaction data.
+
+## How to Deploy
+
+Deploying TronScanner is streamlined with Docker and Google Cloud. Follow the steps below to deploy your instance:
+
+1. **Clone the Repository:**  
+   Begin by cloning the TronScanner repository to your local machine.
+
+   `git clone https://github.com/orlovt/TronScanner.git`
+
+3. **Build the Docker Image:**  
+   Utilize Docker's `buildx` command to build the image for the `linux/amd64` platform. This command also tags the image for Google Cloud's Container Registry.
+  
+   `docker buildx build --platform linux/amd64 -t gcr.io/tronscanner/tron_go . --load`
+
+5. **Push the Image to Google Cloud's Container Registry:**  
+   Once the image is built, push it to the Container Registry.
+  
+   `docker push gcr.io/yourproject_id/repo_name`
+
+7. **Deploy to Google Cloud Run:**  
+   With the image in the Container Registry, deploy TronScanner to Google Cloud Run. This command specifies the platform as managed, sets the region, and allows unauthenticated access.
+  
+   `gcloud run deploy tron-scanner --image gcr.io/yourproject_id/repo_name --platform managed --region us-central1 --allow-unauthenticated`
+
+9. **Verify Deployment:**  
+   After deployment, Google Cloud will provide a URL for your service. Visit this URL to ensure TronScanner is operational and all functionalities are intact.
+
 
 ## License
 
