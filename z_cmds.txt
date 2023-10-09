@@ -1,3 +1,0 @@
-docker buildx build --platform linux/amd64 -t gcr.io/tronscanner/tron_go . --load
-docker push gcr.io/tronscanner/tron_go
-gcloud run deploy tron-go --image gcr.io/tronscanner/tron_go --platform managed --region us-central1 --allow-unauthenticated
